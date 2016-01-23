@@ -8,5 +8,6 @@
     <string name="fragment_3_title">Verify</string>
     <string name="title_activity_maps">Map</string>
     <string name="foundTreasureButton">Treasure Found!</string>
+    <string name="title_activity_verification">VerificationActivity</string>
 
 </resources>

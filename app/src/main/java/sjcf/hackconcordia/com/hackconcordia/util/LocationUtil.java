@@ -4,6 +4,7 @@ import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
@@ -15,9 +16,15 @@ public class LocationUtil {
     public String localityFinder(Context context, double lat, double lng) {
 
         Geocoder gcd = new Geocoder(context, Locale.getDefault());
-        List<Address> addresses = gcd.getFromLocation(lat, lng, 0);
-        if (addresses.size() > 0)
-            System.out.println(addresses.get(0).getLocality());
 
+        try {
+            List<Address> addresses = gcd.getFromLocation(lat, lng, 1);
+            if (addresses.size() > 0)
+                return addresses.get(0).getLocality();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 }

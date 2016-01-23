@@ -39,7 +39,11 @@
 
         <activity
             android:name=".ui.activity.MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps" />
+        <activity
+            android:name=".ui.activity.VerificationActivity"
+            android:label="@string/title_activity_verification"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
