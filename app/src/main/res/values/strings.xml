@@ -6,5 +6,6 @@
     <string name="fragment_1_title">Treasures</string>
     <string name="fragment_2_title">Find</string>
     <string name="fragment_3_title">Verify</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>
