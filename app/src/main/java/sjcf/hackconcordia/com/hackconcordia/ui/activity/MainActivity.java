@@ -1,4 +1,4 @@
-package sjcf.hackconcordia.com.hackconcordia;
+package sjcf.hackconcordia.com.hackconcordia.ui.activity;
 
 import android.content.Context;
 import android.support.design.widget.TabLayout;
@@ -19,6 +19,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
+
+import sjcf.hackconcordia.com.hackconcordia.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -141,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
                 case 2:
                     return mContext.getString(R.string.fragment_3_title);
             }
-            
+
             return null;
         }
     }
