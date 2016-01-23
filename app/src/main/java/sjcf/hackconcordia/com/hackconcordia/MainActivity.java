@@ -141,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
                 case 2:
                     return mContext.getString(R.string.fragment_3_title);
             }
+            
             return null;
         }
     }
