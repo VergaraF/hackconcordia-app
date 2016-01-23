@@ -52,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: Launch camera activity to take picture to be posted to our bakend/clarify
-                startActivity(new Intent(MainActivity.this, MapsActivity.class));
+                Intent intent = new Intent(MainActivity.this, NewSnapActivity.class);
+                startActivity(intent);
             }
         });
 
