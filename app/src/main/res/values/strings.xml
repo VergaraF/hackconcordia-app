@@ -7,5 +7,6 @@
     <string name="fragment_2_title">Find</string>
     <string name="fragment_3_title">Verify</string>
     <string name="title_activity_maps">Map</string>
+    <string name="foundTreasureButton">Treasure Found!</string>
 
 </resources>
