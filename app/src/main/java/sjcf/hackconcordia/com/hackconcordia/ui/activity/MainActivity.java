@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
     private Context mContext;
+    
 
 
     @Override
