@@ -7,8 +7,12 @@ import com.orm.SugarRecord;
 
 
 public class SnapVerification extends SugarRecord implements Parcelable {
+
+    public SnapTreasure snapTreasure;
+    public User submittedByUser;
+    public User toBeVerifiedByUser;
     public String photoUrl;
-    public User takenByUser;
+    public int isVerified;
 
    public SnapVerification() {
 
@@ -16,8 +20,11 @@ public class SnapVerification extends SugarRecord implements Parcelable {
 
     public SnapVerification(Parcel in) {
         id = in.readLong();
+        snapTreasure = in.readParcelable(SnapTreasure.class.getClassLoader());
+        submittedByUser = in.readParcelable(User.class.getClassLoader());
+        toBeVerifiedByUser = in.readParcelable(User.class.getClassLoader());
         photoUrl = in.readString();
-        takenByUser = in.readParcelable(User.class.getClassLoader());
+        isVerified = in.readInt();
     }
 
     public static final Parcelable.Creator<SnapVerification> CREATOR = new Parcelable.Creator<SnapVerification>() {
@@ -38,8 +45,13 @@ public class SnapVerification extends SugarRecord implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(id);
+        if (getId() != null) {
+            dest.writeLong(id);
+        }
+        dest.writeParcelable(snapTreasure, flags);
+        dest.writeParcelable(submittedByUser, flags);
+        dest.writeParcelable(toBeVerifiedByUser, flags);
         dest.writeString(photoUrl);
-        dest.writeParcelable(takenByUser, flags);
+        dest.writeInt(isVerified);
     }
 }
