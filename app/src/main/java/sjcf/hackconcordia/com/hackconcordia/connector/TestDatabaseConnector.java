@@ -155,12 +155,25 @@ public class TestDatabaseConnector implements Connectable {
 
             testSnap.toBeVerifiedByUser = testToBeVerifiedByUser;
 
-            testSnap.photoUrl = null;
+            if(i == 1) {
+                testSnap.photoUrl = "http://i.imgur.com/GcdhR.jpg";
+            }
+
+            else if(i == 2) {
+                testSnap.photoUrl = "http://i.imgur.com/KqipP.jpg";
+            }
+
+            else {
+                testSnap.photoUrl = "http://i.imgur.com/TOmJK.jpg";
+            }
             testSnap.isVerified = 0;
             testSnap.save();
 
             test.add(testSnap);
         }
+
+
+
         return test;
     }
 }

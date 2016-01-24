@@ -34,6 +34,7 @@ public class NewSnapToVerifyActivity extends AppCompatActivity {
     private ImageView cameraLauncher;
     private TextView locationView;
     private Button verifyButton;
+    private TextView helpText;
     private final int REQUEST_IMAGE_CAPTURE = 1;
     private final String TAG = "NewSnapToVerifyActivity";
 
@@ -52,6 +53,9 @@ public class NewSnapToVerifyActivity extends AppCompatActivity {
         cameraLauncher = (ImageView) findViewById(R.id.camera_button2);
         locationView = (TextView) findViewById(R.id.location_place);
         verifyButton = (Button) findViewById(R.id.verify_button);
+        helpText = (TextView) findViewById(R.id.helpText);
+        verifyButton.setVisibility(View.INVISIBLE);
+        verifyButton.setEnabled(false);
 
         cameraLauncher.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +78,8 @@ public class NewSnapToVerifyActivity extends AppCompatActivity {
                 imageToSend.setImageBitmap(bitmap);
                 locationView.setText(LocationUtil.getLocalityName(this));
                 verifyButton.setEnabled(true);
-
+                verifyButton.setVisibility(View.VISIBLE);
+                helpText.setVisibility(View.INVISIBLE);
                 verifyButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

@@ -25,9 +25,7 @@ public class SnapTreasure extends SugarRecord implements Parcelable {
     }
 
     public SnapTreasure(Parcel in) {
-        if(getId() != null) {
-            id = in.readLong();
-        }
+        id = in.readLong();
         createdByUser = in.readParcelable(User.class.getClassLoader());
         foundByUser = in.readParcelable(User.class.getClassLoader());
         photoUrl = in.readString();

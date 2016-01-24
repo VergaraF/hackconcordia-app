@@ -20,9 +20,9 @@
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="23dp"
         android:id="@+id/content_verification_verify"
-        android:layout_weight="0.2"
+        android:layout_weight="0.09"
         android:text="Verify Picture"
         android:textColor="@color/colorWhite"
         android:textSize="21dp"

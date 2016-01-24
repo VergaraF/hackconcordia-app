@@ -19,9 +19,7 @@ public class SnapVerification extends SugarRecord implements Parcelable {
    }
 
     public SnapVerification(Parcel in) {
-        if(getId() != null) {
-            id = in.readLong();
-        }
+        id = in.readLong();
         snapTreasure = in.readParcelable(SnapTreasure.class.getClassLoader());
         submittedByUser = in.readParcelable(User.class.getClassLoader());
         toBeVerifiedByUser = in.readParcelable(User.class.getClassLoader());

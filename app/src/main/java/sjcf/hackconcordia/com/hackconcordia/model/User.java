@@ -16,9 +16,7 @@ public class User extends SugarRecord implements Parcelable {
     }
 
     public User(Parcel in) {
-        if(getId() != null) {
-            id = in.readLong();
-        }
+        id = in.readLong();
         email = in.readString();
         password = in.readString();
         points = in.readInt();
