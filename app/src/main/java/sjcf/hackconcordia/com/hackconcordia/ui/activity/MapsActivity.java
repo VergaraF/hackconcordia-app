@@ -1,4 +1,4 @@
-package sjcf.hackconcordia.com.hackconcordia.activity;
+package sjcf.hackconcordia.com.hackconcordia.ui.activity;
 
 import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;

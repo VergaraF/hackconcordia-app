@@ -1,4 +1,4 @@
-package sjcf.hackconcordia.com.hackconcordia.javaObjects;
+package sjcf.hackconcordia.com.hackconcordia.util;
 
 import android.content.Context;
 import android.location.Address;

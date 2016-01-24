@@ -11,7 +11,7 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="500dp"
-        tools:context="sjcf.hackconcordia.com.hackconcordia.activity.MapsActivity" />
+        tools:context=".ui.activity.MapsActivity" />
 
     <Button
         android:id="@+id/activityMaps_foundTreasureButton"

@@ -21,7 +21,6 @@ import sjcf.hackconcordia.com.hackconcordia.model.User;
 import sjcf.hackconcordia.com.hackconcordia.ui.adapter.FindSnapTreasuresFragment;
 import sjcf.hackconcordia.com.hackconcordia.ui.adapter.MySnapTreasuresFragment;
 import sjcf.hackconcordia.com.hackconcordia.ui.adapter.SnapTreasureVerificationFragment;
-import sjcf.hackconcordia.com.hackconcordia.activity.MapsActivity;
 
 public class MainActivity extends AppCompatActivity {
 
