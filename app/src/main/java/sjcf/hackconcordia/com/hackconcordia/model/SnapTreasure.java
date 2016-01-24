@@ -53,9 +53,7 @@ public class SnapTreasure extends SugarRecord implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        if (getId() != null) {
-            dest.writeLong(id);
-        }
+        dest.writeLong(id);
         dest.writeParcelable(createdByUser, flags);
         dest.writeParcelable(foundByUser, flags);
         dest.writeString(photoUrl);

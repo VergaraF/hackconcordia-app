@@ -23,8 +23,12 @@ import com.clarifai.api.exception.ClarifaiException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
+import sjcf.hackconcordia.com.hackconcordia.Keys;
 import sjcf.hackconcordia.com.hackconcordia.R;
+import sjcf.hackconcordia.com.hackconcordia.model.SnapTreasure;
+import sjcf.hackconcordia.com.hackconcordia.model.User;
 import sjcf.hackconcordia.com.hackconcordia.util.LocationUtil;
 
 /**
@@ -37,6 +41,9 @@ public class NewSnapActivity extends Activity {
     private static final String APP_ID = "IauPgYAri-pVuPvBvJ9ohodx_7RuMqJFg3lGAQYR";
     private static final String APP_SECRET = "7lkedBg9Q8yB96JzAhd821OxlNP9gOormqdDx5SC";
 
+    private User mUser;
+    private SnapTreasure mNewSnapTreasure;
+
     private final ClarifaiClient client = new ClarifaiClient(APP_ID, APP_SECRET);
     private Button postButton;
     private ImageView cameraButton;
@@ -45,16 +52,20 @@ public class NewSnapActivity extends Activity {
     private TextView locationView;
     private static final int REQUEST_IMAGE_CAPTURE = 1;
 
+    private double[] latLng;
+    private String locality;
+
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_snap);
+        Bundle extras = getIntent().getExtras();
+        mUser = extras.getParcelable(Keys.USER_PARCELABLE);
 
         imageView = (ImageView) findViewById(R.id.image_view);
         textView = (TextView) findViewById(R.id.text_view);
         postButton = (Button) findViewById(R.id.post_button);
         cameraButton = (ImageView) findViewById(R.id.camera_button);
         locationView = (TextView) findViewById(R.id.location_text);
-
 
         cameraButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,13 +93,13 @@ public class NewSnapActivity extends Activity {
                 postButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
-
-
+                        // save to db
+                        mNewSnapTreasure.save();
                     }
                 });
-                
-                locationView.setText(LocationUtil.getLocalityName(this));
+                locality = LocationUtil.getLocalityName(this);
+                latLng = LocationUtil.getLocation(this);
+                locationView.setText(locality);
                 postButton.setEnabled(false);
 
 
@@ -157,9 +168,18 @@ public class NewSnapActivity extends Activity {
     private void updateUIForResult(RecognitionResult result) {
         if (result != null) {
             if (result.getStatusCode() == RecognitionResult.StatusCode.OK) {
+                mNewSnapTreasure = new SnapTreasure();
+                mNewSnapTreasure.createdByUser = mUser;
+                mNewSnapTreasure.foundByUser = null;
+                mNewSnapTreasure.lat = latLng[0];
+                mNewSnapTreasure.lng = latLng[1];
+                mNewSnapTreasure.localityName = locality;
+                mNewSnapTreasure.tags = new ArrayList<>();
+
                 // Display the list of tags in the UI.
                 StringBuilder b = new StringBuilder();
                 for (Tag tag : result.getTags()) {
+                    mNewSnapTreasure.tags.add(tag.getName());
                     b.append(b.length() > 0 ? ", " : "").append(tag.getName());
                 }
                 textView.setText("Tags:\n" + b);

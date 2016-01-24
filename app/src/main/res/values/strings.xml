@@ -11,5 +11,7 @@
     <string name="nobody_found">No one has found yet</string>
     <string name="your_points">Your points:</string>
     <string name="needs_to_be_verified">Needs to be verified</string>
+    <string name="verify_button">Verify Snap</string>
+    <string name="taken_by">Taken by:</string>
 
 </resources>

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import sjcf.hackconcordia.com.hackconcordia.Keys;
 import sjcf.hackconcordia.com.hackconcordia.R;
 import sjcf.hackconcordia.com.hackconcordia.model.SnapVerification;
+import sjcf.hackconcordia.com.hackconcordia.ui.activity.MainActivity;
 import sjcf.hackconcordia.com.hackconcordia.ui.activity.MapsActivity;
 import sjcf.hackconcordia.com.hackconcordia.ui.activity.VerificationActivity;
 
@@ -26,7 +27,6 @@ public class SnapTreasureVerificationViewAdapter extends RecyclerView.Adapter<Sn
     public SnapTreasureVerificationViewAdapter(Context context, List<SnapVerification> items) {
         mValues = items;
         mContext = context;
-
     }
 
     @Override
@@ -65,6 +65,7 @@ public class SnapTreasureVerificationViewAdapter extends RecyclerView.Adapter<Sn
                 public void onClick(View v) {
                     Intent mapIntent = new Intent(mContext, VerificationActivity.class);
                     mapIntent.putExtra(Keys.SNAP_VERIFICATION_PARCEABLE, mItem);
+                    mapIntent.putExtra(Keys.USER_PARCELABLE, ((MainActivity) mContext).getLoggedInUser());
                     mContext.startActivity(mapIntent);
                 }
             });

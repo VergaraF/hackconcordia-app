@@ -19,9 +19,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import sjcf.hackconcordia.com.hackconcordia.Keys;
 import sjcf.hackconcordia.com.hackconcordia.R;
 import sjcf.hackconcordia.com.hackconcordia.model.SnapTreasure;
+import sjcf.hackconcordia.com.hackconcordia.model.User;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
-
+    private User mUser;
     private SnapTreasure mSnapTreasure;
     private GoogleMap mMap;
 
@@ -30,6 +31,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         Bundle extras = getIntent().getExtras();
+
+        mUser = extras.getParcelable(Keys.USER_PARCELABLE);
         mSnapTreasure = extras.getParcelable(Keys.SNAP_TREASURE_PARCEABLE);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -60,12 +63,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
+                Intent intent = new Intent(MapsActivity.this, NewSnapToVerifyActivity.class);
+                intent.putExtra(Keys.SNAP_TREASURE_PARCEABLE, mSnapTreasure);
+                intent.putExtra(Keys.USER_PARCELABLE, mUser);
+                startActivity(intent);
             }
         });
 
-//        // Add a marker in Sydney and move the camera
-//        LatLng sydney = new LatLng(-34, 151);
-//        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 }

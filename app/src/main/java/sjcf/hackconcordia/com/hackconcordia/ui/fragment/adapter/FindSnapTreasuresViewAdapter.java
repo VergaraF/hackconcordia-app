@@ -68,6 +68,7 @@ public class FindSnapTreasuresViewAdapter extends RecyclerView.Adapter<FindSnapT
                 public void onClick(View v) {
                     Intent mapIntent = new Intent(mContext, MapsActivity.class);
                     mapIntent.putExtra(Keys.SNAP_TREASURE_PARCEABLE, mItem);
+                    mapIntent.putExtra(Keys.USER_PARCELABLE, ((MainActivity)mContext).getLoggedInUser());
                     mContext.startActivity(mapIntent);
                 }
             });

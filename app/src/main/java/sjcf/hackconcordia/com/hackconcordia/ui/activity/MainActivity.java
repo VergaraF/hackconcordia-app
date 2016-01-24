@@ -52,12 +52,9 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-//                Intent intent = new Intent(MainActivity.this, NewSnapActivity.class);
-//                startActivity(intent);
-
-                // TODO: Launch camera activity to take picture to be posted to our bakend/clarify
-                startActivity(new Intent(MainActivity.this, MapsActivity.class));
+                Intent intent = new Intent(MainActivity.this, NewSnapActivity.class);
+                intent.putExtra(Keys.USER_PARCELABLE, mUser);
+                startActivity(intent);
 
             }
         });
@@ -81,6 +78,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public User getLoggedInUser() {
+        return mUser;
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {

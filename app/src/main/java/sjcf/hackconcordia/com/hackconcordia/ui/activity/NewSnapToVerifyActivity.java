@@ -19,10 +19,16 @@ import com.clarifai.api.RecognitionResult;
 
 import java.io.IOException;
 
+import sjcf.hackconcordia.com.hackconcordia.Keys;
 import sjcf.hackconcordia.com.hackconcordia.R;
+import sjcf.hackconcordia.com.hackconcordia.model.SnapVerification;
+import sjcf.hackconcordia.com.hackconcordia.model.User;
 import sjcf.hackconcordia.com.hackconcordia.util.LocationUtil;
 
 public class NewSnapToVerifyActivity extends AppCompatActivity {
+
+    private User mUser;
+    private SnapVerification mNewSnapVerification;
 
     private ImageView imageToSend;
     private ImageView cameraLauncher;
@@ -34,10 +40,18 @@ public class NewSnapToVerifyActivity extends AppCompatActivity {
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_snap_to_verify);
+        Bundle extras = getIntent().getExtras();
+        mUser = extras.getParcelable(Keys.USER_PARCELABLE);
+        mNewSnapVerification = new SnapVerification();
+        mNewSnapVerification.snapTreasure = extras.getParcelable(Keys.SNAP_TREASURE_PARCEABLE);
+        mNewSnapVerification.toBeVerifiedByUser = mNewSnapVerification.snapTreasure.createdByUser;
+        mNewSnapVerification.submittedByUser = mUser;
+        mNewSnapVerification.isVerified = 0;
 
         imageToSend = (ImageView) findViewById(R.id.imageView2);
         cameraLauncher = (ImageView) findViewById(R.id.camera_button2);
         locationView = (TextView) findViewById(R.id.location_place);
+        verifyButton = (Button) findViewById(R.id.verify_button);
 
         cameraLauncher.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +74,13 @@ public class NewSnapToVerifyActivity extends AppCompatActivity {
                 imageToSend.setImageBitmap(bitmap);
                 locationView.setText(LocationUtil.getLocalityName(this));
                 verifyButton.setEnabled(true);
-                //TODO: Attach verify listener to upload umage to the server.
+
+                verifyButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //TODO: upload umage to the server.
+                    }
+                });
             }
         }
     }

@@ -30,6 +30,7 @@ public class TestDatabaseConnector implements Connectable {
         testUser.email = "testemail@test.com";
         testUser.password = "password";
         testUser.points = 100;
+        testUser.save();
         return testUser;
     }
 
@@ -44,11 +45,13 @@ public class TestDatabaseConnector implements Connectable {
             testCreateUser.email = "testcreateemail" + i + "@test.com";
             testCreateUser.password = "password";
             testCreateUser.points = i * 100;
+            testCreateUser.save();
 
             User testFoundByUser = new User();
             testCreateUser.email = "testfoundemail" + i + "@test.com";
             testCreateUser.password = "password";
             testCreateUser.points = i * 100;
+            testFoundByUser.save();
 
             testSnapTreasure.createdByUser = testCreateUser;
             testSnapTreasure.foundByUser = testFoundByUser;
@@ -68,8 +71,9 @@ public class TestDatabaseConnector implements Connectable {
             testPendingUser.email = "testpendinguser@test.com";
             testPendingUser.password = "password";
             testPendingUser.points = 100;
+            testPendingUser.save();
             testPendingUsers.add(testPendingUser);
-
+            testSnapTreasure.save();
             test.add(testSnapTreasure);
         }
         return test;
@@ -86,11 +90,13 @@ public class TestDatabaseConnector implements Connectable {
             testCreateUser.email = "testcreateemail" + i + "@test.com";
             testCreateUser.password = "password";
             testCreateUser.points = i * 100;
+            testCreateUser.save();
 
             User testFoundByUser = new User();
-            testCreateUser.email = "testfoundemail" + i + "@test.com";
-            testCreateUser.password = "password";
-            testCreateUser.points = i * 100;
+            testFoundByUser.email = "testfoundemail" + i + "@test.com";
+            testFoundByUser.password = "password";
+            testFoundByUser.points = i * 100;
+            testFoundByUser.save();
 
             testSnapTreasure.createdByUser = testCreateUser;
             testSnapTreasure.foundByUser = testFoundByUser;
@@ -104,7 +110,7 @@ public class TestDatabaseConnector implements Connectable {
             testTags.add("tag 1");
             testTags.add("tag 2");
             testSnapTreasure.tags = testTags;
-
+            testSnapTreasure.save();
             test.add(testSnapTreasure);
         }
         return test;
@@ -128,6 +134,7 @@ public class TestDatabaseConnector implements Connectable {
             testTags.add("Tag 1");
             testTags.add("Tag 2");
             testTreasure.tags = testTags;
+            testTreasure.save();
 
             testSnap.snapTreasure = testTreasure;
 
@@ -136,17 +143,22 @@ public class TestDatabaseConnector implements Connectable {
             testTakenByUser.email = "testTakenByUser@test.com";
             testTakenByUser.password = "password";
             testTakenByUser.points = 100;
+            testTakenByUser.save();
             testSnap.submittedByUser = testTakenByUser;
 
             // add toBeVerifiedByUser
             User testToBeVerifiedByUser = new User();
-            testTakenByUser.email = "testToBeVerifiedByUser@test.com";
-            testTakenByUser.password = "password";
-            testTakenByUser.points = 100;
+            testToBeVerifiedByUser.email = "testToBeVerifiedByUser@test.com";
+            testToBeVerifiedByUser.password = "password";
+            testToBeVerifiedByUser.points = 223;
+            testToBeVerifiedByUser.save();
+
             testSnap.toBeVerifiedByUser = testToBeVerifiedByUser;
 
             testSnap.photoUrl = null;
             testSnap.isVerified = 0;
+            testSnap.save();
+
             test.add(testSnap);
         }
         return test;
