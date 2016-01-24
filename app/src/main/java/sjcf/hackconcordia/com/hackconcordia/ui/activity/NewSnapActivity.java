@@ -81,7 +81,16 @@ public class NewSnapActivity extends Activity {
                 cameraButton.setVisibility(View.INVISIBLE);
                 imageView.setImageBitmap(bitmap);
                 textView.setText("Recognizing...");
-                postButton.setEnabled(false);
+                postButton.setEnabled(true);
+                postButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+
+
+                    }
+                });
+
 
                 // Run recognition on a background thread since it makes a network call.
                 new AsyncTask<Bitmap, Void, RecognitionResult>() {

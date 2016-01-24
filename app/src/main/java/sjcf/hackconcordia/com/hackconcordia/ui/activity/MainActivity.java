@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 //                startActivity(intent);
 
                 // TODO: Launch camera activity to take picture to be posted to our bakend/clarify
-                startActivity(new Intent(MainActivity.this, VerificationActivity.class));
+                startActivity(new Intent(MainActivity.this, MapsActivity.class));
 
             }
         });
