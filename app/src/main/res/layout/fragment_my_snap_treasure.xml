@@ -5,12 +5,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     tools:context=".ui.adapter.MySnapTreasuresFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/fragment_my_snap_treasure_points"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/fragment_1_title"/>
 
     <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -18,9 +19,6 @@
         android:name="sjcf.hackconcordia.com.hackconcordia.ui.fragment.MySnapTreasuresFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        app:layoutManager="LinearLayoutManager"
-        tools:listitem="@layout/fragment_my_snap_treasure_item" />
+        />
 
 </LinearLayout>

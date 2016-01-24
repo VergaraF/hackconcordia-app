@@ -1,5 +1,6 @@
 package sjcf.hackconcordia.com.hackconcordia.ui.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -15,16 +16,22 @@ import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import sjcf.hackconcordia.com.hackconcordia.Keys;
 import sjcf.hackconcordia.com.hackconcordia.R;
+import sjcf.hackconcordia.com.hackconcordia.model.SnapTreasure;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
+    private SnapTreasure mSnapTreasure;
     private GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        Bundle extras = getIntent().getExtras();
+        mSnapTreasure = extras.getParcelable(Keys.SNAP_TREASURE_PARCEABLE);
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -34,12 +41,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-
-        // TODO: Make map object using location pulled from parsable
-
         mMap = googleMap;
-        double latitude  = -33.87365;
-        double longitude = 151.20689;
+//        double latitude  = -33.87365;
+//        double longitude = 151.20689;
+        double latitude  = mSnapTreasure.lat;
+        double longitude = mSnapTreasure.lng;
 
         LatLng treasureLocation = new LatLng(latitude,longitude);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(treasureLocation, 16));
