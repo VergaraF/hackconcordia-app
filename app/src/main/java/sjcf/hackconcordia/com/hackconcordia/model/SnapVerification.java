@@ -7,10 +7,14 @@ import com.orm.SugarRecord;
 
 
 public class SnapVerification extends SugarRecord implements Parcelable {
-    String photoUrl;
-    User takenByUser;
+    public String photoUrl;
+    public User takenByUser;
 
-    protected SnapVerification(Parcel in) {
+   public SnapVerification() {
+
+   }
+
+    public SnapVerification(Parcel in) {
         id = in.readLong();
         photoUrl = in.readString();
         takenByUser = in.readParcelable(User.class.getClassLoader());

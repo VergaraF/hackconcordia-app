@@ -13,7 +13,7 @@ import java.util.Locale;
  */
 public class LocationUtil {
 
-    public String localityFinder(Context context, double lat, double lng) {
+    public static String localityFinder(Context context, double lat, double lng) {
 
         Geocoder gcd = new Geocoder(context, Locale.getDefault());
 

@@ -16,7 +16,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import sjcf.hackconcordia.com.hackconcordia.Keys;
 import sjcf.hackconcordia.com.hackconcordia.R;
+import sjcf.hackconcordia.com.hackconcordia.connector.TestDatabaseConnector;
 import sjcf.hackconcordia.com.hackconcordia.model.User;
 import sjcf.hackconcordia.com.hackconcordia.ui.adapter.FindSnapTreasuresFragment;
 import sjcf.hackconcordia.com.hackconcordia.ui.adapter.MySnapTreasuresFragment;
@@ -26,17 +28,15 @@ public class MainActivity extends AppCompatActivity {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
-
     private ViewPager mViewPager;
     private Context mContext;
     private User mUser;
-    
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mUser = TestDatabaseConnector.getInstance().getUser("testuser1@test.com", "password");
         mContext = this;
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -78,15 +78,17 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public static class ViewPagerFragment extends Fragment {
+    public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-
-        public ViewPagerFragment() {
+        public SectionsPagerAdapter(FragmentManager fm) {
+            super(fm);
         }
 
-        public static Fragment newInstance(int sectionNumber) {
+        @Override
+        public Fragment getItem(int sectionNumber) {
             Fragment fragment;
             Bundle args = new Bundle();
+            args.putParcelable(Keys.USER_PARCELABLE, MainActivity.this.mUser);
 
             if (sectionNumber == 0) {
                 fragment = new MySnapTreasuresFragment();
@@ -98,19 +100,6 @@ public class MainActivity extends AppCompatActivity {
 
             fragment.setArguments(args);
             return fragment;
-        }
-
-    }
-
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
-
-        public SectionsPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return ViewPagerFragment.newInstance(position);
         }
 
         @Override

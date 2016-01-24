@@ -8,24 +8,24 @@ import com.orm.SugarRecord;
 
 import java.util.List;
 
+import sjcf.hackconcordia.com.hackconcordia.util.LocationUtil;
+
 public class SnapTreasure extends SugarRecord implements Parcelable {
 
-    User createdByUser;
-    User foundByUser;
-    String photoUrl;
-    double lat;
-    double lng;
-    String localityName;
-    List<String> tags;
-    List<User> pendingUsers;
+    public User createdByUser;
+    public User foundByUser;
+    public String photoUrl;
+    public double lat;
+    public double lng;
+    public String localityName;
+    public List<String> tags;
+    public List<User> pendingUsers;
 
-    @Override
-    public void save() {
-        super.save();
-        // TODO: Get user's location name from lat,lng
+    public SnapTreasure() {
+
     }
 
-    protected SnapTreasure(Parcel in) {
+    public SnapTreasure(Parcel in) {
         id = in.readLong();
         createdByUser = in.readParcelable(User.class.getClassLoader());
         foundByUser = in.readParcelable(User.class.getClassLoader());

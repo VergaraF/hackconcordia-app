@@ -7,9 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import sjcf.hackconcordia.com.hackconcordia.Keys;
 import sjcf.hackconcordia.com.hackconcordia.R;
+import sjcf.hackconcordia.com.hackconcordia.model.User;
 
 public class SnapTreasureVerificationFragment extends Fragment {
+
+    private User mUser;
 
     public SnapTreasureVerificationFragment() {
     }
@@ -17,12 +21,17 @@ public class SnapTreasureVerificationFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        fetchData();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_snap_treasure_verification, container, false);
         return view;
+    }
+
+    private void fetchData() {
+        mUser = getArguments().getParcelable(Keys.USER_PARCELABLE);
     }
 
 }
