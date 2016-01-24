@@ -35,7 +35,9 @@ public class User extends SugarRecord implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(id);
+        if (getId() != null) {
+            dest.writeLong(id);
+        }
         dest.writeString(email);
         dest.writeString(password);
         dest.writeInt(points);
