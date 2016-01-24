@@ -25,9 +25,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import sjcf.hackconcordia.com.hackconcordia.R;
-
-import static android.provider.MediaStore.Images.Media;
-
+import sjcf.hackconcordia.com.hackconcordia.util.LocationUtil;
 
 /**
  * A simple Activity that performs recognition using the Clarifai API.
@@ -35,18 +33,16 @@ import static android.provider.MediaStore.Images.Media;
 public class NewSnapActivity extends Activity {
     private static final String TAG = NewSnapActivity.class.getSimpleName();
 
-    // IMPORTANT NOTE: you should replace these keys with your own App ID and secret.
-    // These can be obtained at https://developer.clarifai.com/applications
+    //Authentication API Keys
     private static final String APP_ID = "IauPgYAri-pVuPvBvJ9ohodx_7RuMqJFg3lGAQYR";
     private static final String APP_SECRET = "7lkedBg9Q8yB96JzAhd821OxlNP9gOormqdDx5SC";
-
-    private static final int CODE_PICK = 1;
 
     private final ClarifaiClient client = new ClarifaiClient(APP_ID, APP_SECRET);
     private Button postButton;
     private ImageView cameraButton;
     private ImageView imageView;
     private TextView textView;
+    private TextView locationView;
     private static final int REQUEST_IMAGE_CAPTURE = 1;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +53,7 @@ public class NewSnapActivity extends Activity {
         textView = (TextView) findViewById(R.id.text_view);
         postButton = (Button) findViewById(R.id.post_button);
         cameraButton = (ImageView) findViewById(R.id.camera_button);
+        locationView = (TextView) findViewById(R.id.location_text);
 
 
         cameraButton.setOnClickListener(new View.OnClickListener() {
@@ -90,6 +87,9 @@ public class NewSnapActivity extends Activity {
 
                     }
                 });
+                
+                locationView.setText(LocationUtil.getLocalityName(this));
+                postButton.setEnabled(false);
 
 
                 // Run recognition on a background thread since it makes a network call.

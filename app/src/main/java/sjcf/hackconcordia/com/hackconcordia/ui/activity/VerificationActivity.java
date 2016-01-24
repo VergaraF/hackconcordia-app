@@ -17,12 +17,17 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import sjcf.hackconcordia.com.hackconcordia.Keys;
 import sjcf.hackconcordia.com.hackconcordia.R;
+
+import sjcf.hackconcordia.com.hackconcordia.model.SnapVerification;
 import sjcf.hackconcordia.com.hackconcordia.task.DownloadImageTask;
 
 public class VerificationActivity extends AppCompatActivity {
 
     ImageView verificationImage;
+    private SnapVerification mSnapVerification;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,14 +37,12 @@ public class VerificationActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
+
         verificationImage = (ImageView) findViewById(R.id.verificationImage);
         Picasso.with(this).load("http://i.imgur.com/xxBbgdQ.jpg").into(verificationImage);
 
-//        new DownloadImageTask(verificationImage)
-//                .execute("http://imgur.com/gallery/xxBbgdQ");
-
-
-
+        Bundle extras = getIntent().getExtras();
+        mSnapVerification = extras.getParcelable(Keys.SNAP_VERIFICATION_PARCEABLE);
 
 
 

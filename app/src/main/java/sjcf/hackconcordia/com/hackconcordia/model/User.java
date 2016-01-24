@@ -7,11 +7,15 @@ import com.orm.SugarRecord;
 
 public class User extends SugarRecord implements Parcelable {
 
-    String email;
-    String password;// store in plaintext for now. no time
-    int points;
+    public String email;
+    public String password;// store in plaintext for now. no time
+    public int points;
 
-    protected User(Parcel in) {
+    public User() {
+
+    }
+
+    public User(Parcel in) {
         id = in.readLong();
         email = in.readString();
         password = in.readString();
@@ -31,7 +35,9 @@ public class User extends SugarRecord implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(id);
+        if (getId() != null) {
+            dest.writeLong(id);
+        }
         dest.writeString(email);
         dest.writeString(password);
         dest.writeInt(points);
