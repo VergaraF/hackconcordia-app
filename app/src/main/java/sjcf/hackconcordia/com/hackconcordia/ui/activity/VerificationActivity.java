@@ -1,17 +1,28 @@
 package sjcf.hackconcordia.com.hackconcordia.ui.activity;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
 
+import com.squareup.picasso.Picasso;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import sjcf.hackconcordia.com.hackconcordia.R;
+import sjcf.hackconcordia.com.hackconcordia.task.DownloadImageTask;
 
 public class VerificationActivity extends AppCompatActivity {
+
+    ImageView verificationImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,14 +33,14 @@ public class VerificationActivity extends AppCompatActivity {
 
 
         verificationImage = (ImageView) findViewById(R.id.verificationImage);
+        Picasso.with(this).load("http://i.imgur.com/xxBbgdQ.jpg").into(verificationImage);
 
-        try {
-            URL address = new URL("http://imgur.com/gallery/xxBbgdQ");
-            Bitmap bmp = BitmapFactory.decodeStream(address.openConnection().getInputStream());
-            //verificationImage.setImageBitmap(bmp);
-        } catch (IOException e) {
-            throw new RuntimeException();
-        }
+//        new DownloadImageTask(verificationImage)
+//                .execute("http://imgur.com/gallery/xxBbgdQ");
+
+
+
+
 
 
     }

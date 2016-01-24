@@ -7,10 +7,25 @@
     android:orientation="vertical"
     android:weightSum="1">
 
+
     <ImageView
-        android:layout_width="376dp"
+        android:layout_width="match_parent"
+        android:layout_height="299dp"
+        android:id="@+id/verificationImage"
+        android:layout_marginTop="50dp"
+        android:layout_weight="0.52" />
+
+    <TextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.65" />
+        android:text="New Text"
+        android:id="@+id/textView"
+        android:layout_weight="0.31" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:id="@+id/button"
+        android:layout_weight="0.16" />
 </LinearLayout>
