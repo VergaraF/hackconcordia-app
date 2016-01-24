@@ -34,6 +34,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mUser = extras.getParcelable(Keys.USER_PARCELABLE);
         mSnapTreasure = extras.getParcelable(Keys.SNAP_TREASURE_PARCEABLE);
+        Button button = (Button) findViewById(R.id.activityMaps_foundTreasureButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                Intent intent = new Intent(MapsActivity.this, NewSnapToVerifyActivity.class);
+                intent.putExtra(Keys.SNAP_TREASURE_PARCEABLE, mSnapTreasure);
+                intent.putExtra(Keys.USER_PARCELABLE, mUser);
+                startActivity(intent);
+            }
+        });
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -59,16 +69,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .strokeColor(Color.RED));
 
 
-        Button button = (Button) findViewById(R.id.activityMaps_foundTreasureButton);
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Perform action on click
-                Intent intent = new Intent(MapsActivity.this, NewSnapToVerifyActivity.class);
-                intent.putExtra(Keys.SNAP_TREASURE_PARCEABLE, mSnapTreasure);
-                intent.putExtra(Keys.USER_PARCELABLE, mUser);
-                startActivity(intent);
-            }
-        });
 
     }
 }

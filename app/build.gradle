@@ -30,4 +30,5 @@ dependencies {
     compile 'com.google.android.gms:play-services:8.4.0'
     compile 'com.clarifai:clarifai-api-java:1.2.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile files('libs/cloudinary-android-1.2.2.jar')
 }

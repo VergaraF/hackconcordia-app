@@ -22,10 +22,15 @@ import com.clarifai.api.RecognitionRequest;
 import com.clarifai.api.RecognitionResult;
 import com.clarifai.api.Tag;
 import com.clarifai.api.exception.ClarifaiException;
+import com.cloudinary.Url;
+import com.cloudinary.utils.ObjectUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import sjcf.hackconcordia.com.hackconcordia.Keys;
 import sjcf.hackconcordia.com.hackconcordia.R;
@@ -53,9 +58,11 @@ public class NewSnapActivity extends Activity {
     private TextView textView;
     private TextView locationView;
     private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private InputStream stream;
 
     private double[] latLng;
     private String locality;
+    private String url;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,44 +90,69 @@ public class NewSnapActivity extends Activity {
         });
     }
 
-    @Override protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+    @Override protected void onActivityResult(int requestCode, int resultCode, final Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            // The user took an image. Send it to Clarifai for recognition.
-            Log.d(TAG, "User took the image: " + intent.getData());
-            Bitmap bitmap = loadBitmapFromUri(intent.getData());
-            if (bitmap != null) {
-                cameraButton.setVisibility(View.INVISIBLE);
-                imageView.setImageBitmap(bitmap);
-                textView.setTypeface(null, Typeface.NORMAL);
-                textView.setText("Recognizing...");
-                postButton.setVisibility(View.VISIBLE);
-                postButton.setEnabled(true);
-                postButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // save to db
-                        mNewSnapTreasure.save();
-                    }
-                });
-                locality = LocationUtil.getLocalityName(this);
-                latLng = LocationUtil.getLocation(this);
-                locationView.setText(locality);
-                postButton.setEnabled(false);
 
+            new AsyncTask() {
+                RecognitionResult result;
+                Bitmap bitmap;
 
-                // Run recognition on a background thread since it makes a network call.
-                new AsyncTask<Bitmap, Void, RecognitionResult>() {
-                    @Override protected RecognitionResult doInBackground(Bitmap... bitmaps) {
-                        return recognizeBitmap(bitmaps[0]);
+                @Override
+                protected void onPreExecute() {
+                    super.onPreExecute();
+                    // The user took an image. Send it to Clarifai for recognition.
+                    Log.d(TAG, "User took the image: " + intent.getData());
+                    bitmap = loadBitmapFromUri(intent.getData());
+                    if (bitmap != null) {
+                        cameraButton.setVisibility(View.INVISIBLE);
+                        imageView.setImageBitmap(bitmap);
+                        textView.setTypeface(null, Typeface.NORMAL);
+                        textView.setText("Recognizing...");
+                        postButton.setVisibility(View.VISIBLE);
+                        postButton.setEnabled(true);
+                        postButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                // save to db
+                                mNewSnapTreasure.save();
+                                finish();
+                            }
+                        });
+                        locality = LocationUtil.getLocalityName(NewSnapActivity.this);
+                        latLng = LocationUtil.getLocation(NewSnapActivity.this);
+                        locationView.setText(locality);
+                        postButton.setEnabled(false);
+                    } else {
+                        textView.setText("Unable to load selected image.");
                     }
-                    @Override protected void onPostExecute(RecognitionResult result) {
+                }
+
+                @Override
+                protected Object doInBackground(Object[] params) {
+                    try {
+                        result =  recognizeBitmap(bitmap);
+                        Map response = null;
+                        response = Keys.cloudinary.uploader().upload(stream, ObjectUtils.emptyMap());
+                        String signature = (String) response.get("public_id");
+                        url = Keys.CLOUDINARY_GET_ENDPOINT + signature + ".jpg";
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(Object o) {
+                    super.onPostExecute(o);
+                    try {
                         updateUIForResult(result);
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                }.execute(bitmap);
-            } else {
-                textView.setText("Unable to load selected image.");
-            }
+                }
+
+            }.execute();
         }
     }
 
@@ -140,7 +172,9 @@ public class NewSnapActivity extends Activity {
 
             opts = new BitmapFactory.Options();
             opts.inSampleSize = sampleSize;
-            return BitmapFactory.decodeStream(getContentResolver().openInputStream(uri), null, opts);
+            InputStream bitmapStream = getContentResolver().openInputStream(uri);
+            stream = getContentResolver().openInputStream(uri);
+            return BitmapFactory.decodeStream(bitmapStream, null, opts);
         } catch (IOException e) {
             Log.e(TAG, "Error loading image: " + uri, e);
         }
@@ -171,7 +205,7 @@ public class NewSnapActivity extends Activity {
     }
 
     /** Updates the UI by displaying tags for the given result. */
-    private void updateUIForResult(RecognitionResult result) {
+    private void updateUIForResult(RecognitionResult result) throws IOException {
         if (result != null) {
             if (result.getStatusCode() == RecognitionResult.StatusCode.OK) {
                 mNewSnapTreasure = new SnapTreasure();
@@ -181,6 +215,8 @@ public class NewSnapActivity extends Activity {
                 mNewSnapTreasure.lng = latLng[1];
                 mNewSnapTreasure.localityName = locality;
                 mNewSnapTreasure.tags = new ArrayList<>();
+                mNewSnapTreasure.photoUrl = url;
+                Log.i(TAG, mNewSnapTreasure.photoUrl);
 
                 // Display the list of tags in the UI.
                 StringBuilder b = new StringBuilder();
