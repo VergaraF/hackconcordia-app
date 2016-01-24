@@ -15,8 +15,15 @@ public class SnapTreasure extends SugarRecord implements Parcelable {
     String photoUrl;
     double lat;
     double lng;
+    String localityName;
     List<String> tags;
     List<User> pendingUsers;
+
+    @Override
+    public void save() {
+        super.save();
+        // TODO: Get user's location name from lat,lng
+    }
 
     protected SnapTreasure(Parcel in) {
         id = in.readLong();
@@ -25,6 +32,7 @@ public class SnapTreasure extends SugarRecord implements Parcelable {
         photoUrl = in.readString();
         lat = in.readLong();
         lng = in.readLong();
+        localityName = in.readString();
         in.readStringList(tags);
         in.readTypedList(pendingUsers, User.CREATOR);
     }
@@ -53,6 +61,7 @@ public class SnapTreasure extends SugarRecord implements Parcelable {
         dest.writeString(photoUrl);
         dest.writeDouble(lat);
         dest.writeDouble(lng);
+        dest.writeString(localityName);
         dest.writeStringList(tags);
         dest.writeTypedList(pendingUsers);
     }
