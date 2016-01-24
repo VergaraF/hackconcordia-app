@@ -6,13 +6,20 @@
     tools:context=".ui.adapter.MySnapTreasuresFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/colorWhite">
 
     <TextView
         android:id="@+id/fragment_my_snap_treasure_points"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="17dp"
         android:text="@string/fragment_1_title"/>
+
 
     <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/fragment_my_snap_treasure_list"

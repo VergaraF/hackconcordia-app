@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -64,6 +66,8 @@ public class NewSnapActivity extends Activity {
         imageView = (ImageView) findViewById(R.id.image_view);
         textView = (TextView) findViewById(R.id.text_view);
         postButton = (Button) findViewById(R.id.post_button);
+        postButton.setEnabled(false);
+        postButton.setVisibility(View.INVISIBLE);
         cameraButton = (ImageView) findViewById(R.id.camera_button);
         locationView = (TextView) findViewById(R.id.location_text);
 
@@ -88,7 +92,9 @@ public class NewSnapActivity extends Activity {
             if (bitmap != null) {
                 cameraButton.setVisibility(View.INVISIBLE);
                 imageView.setImageBitmap(bitmap);
+                textView.setTypeface(null, Typeface.NORMAL);
                 textView.setText("Recognizing...");
+                postButton.setVisibility(View.VISIBLE);
                 postButton.setEnabled(true);
                 postButton.setOnClickListener(new View.OnClickListener() {
                     @Override

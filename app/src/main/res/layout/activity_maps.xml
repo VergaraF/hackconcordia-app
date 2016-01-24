@@ -17,11 +17,14 @@
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:text="@string/foundTreasureButton"
+        android:textColor="@color/colorWhite"
+        android:textSize="21dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:background="@color/colorAccent"/>
 
 </LinearLayout>
 

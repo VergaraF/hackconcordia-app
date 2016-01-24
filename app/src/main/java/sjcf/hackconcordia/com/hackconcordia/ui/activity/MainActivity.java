@@ -55,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, NewSnapActivity.class);
                 intent.putExtra(Keys.USER_PARCELABLE, mUser);
                 startActivity(intent);
-
             }
         });
 

@@ -21,7 +21,10 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/verify_button"
         android:id="@+id/content_verification_verify"
-        android:layout_weight="0.2" />
+        android:layout_weight="0.2"
+        android:text="Verify Picture"
+        android:textColor="@color/colorWhite"
+        android:textSize="21dp"
+        android:background="@color/colorAccent"/>
 </LinearLayout>
