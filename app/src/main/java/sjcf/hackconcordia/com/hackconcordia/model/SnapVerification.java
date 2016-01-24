@@ -51,6 +51,7 @@ public class SnapVerification extends SugarRecord implements Parcelable {
         dest.writeParcelable(snapTreasure, flags);
         dest.writeParcelable(submittedByUser, flags);
         dest.writeParcelable(toBeVerifiedByUser, flags);
+
         dest.writeString(photoUrl);
         dest.writeInt(isVerified);
     }
