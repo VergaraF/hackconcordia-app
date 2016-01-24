@@ -1,6 +1,7 @@
 package sjcf.hackconcordia.com.hackconcordia.ui.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,7 @@ import sjcf.hackconcordia.com.hackconcordia.model.User;
 import sjcf.hackconcordia.com.hackconcordia.ui.adapter.FindSnapTreasuresFragment;
 import sjcf.hackconcordia.com.hackconcordia.ui.adapter.MySnapTreasuresFragment;
 import sjcf.hackconcordia.com.hackconcordia.ui.adapter.SnapTreasureVerificationFragment;
+import sjcf.hackconcordia.com.hackconcordia.activity.MapsActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // TODO: Launch camera activity to take picture to be posted to our bakend/clarify
+                startActivity(new Intent(MainActivity.this, MapsActivity.class));
             }
         });
 
