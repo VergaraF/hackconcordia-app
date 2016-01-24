@@ -1,13 +1,15 @@
 <resources>
-    <string name="app_name">SnapHunt</string>
+    <string name="app_name">Snap Hunt</string>
     <string name="action_settings">Settings</string>
-    <string name="section_format">Hello World from section: %1$d</string>
 
     <string name="fragment_1_title">Treasures</string>
     <string name="fragment_2_title">Find</string>
     <string name="fragment_3_title">Verify</string>
     <string name="title_activity_maps">Map</string>
-    <string name="foundTreasureButton">Treasure Found!</string>
-    <string name="title_activity_verification">VerificationActivity</string>
+    <string name="foundTreasureButton">I found a treasure!</string>
+    <string name="title_activity_verification">Verification</string>
+    <string name="nobody_found">No one has found yet</string>
+    <string name="your_points">Your points:</string>
+    <string name="needs_to_be_verified">Needs to be verified</string>
 
 </resources>
